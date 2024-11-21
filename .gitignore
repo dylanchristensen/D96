@@ -144,3 +144,7 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+
+# Frontend build outputs
+dist/
+build/
