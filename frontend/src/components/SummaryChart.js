@@ -24,7 +24,16 @@ const SummaryChart = () => {
         <div>
             <h2>Summary Chart</h2>
             {chartData ? (
-                <Bar data={chartData} />
+                <Bar
+                    data={chartData}
+                    options={{
+                        responsive: true,
+                        plugins: {
+                            legend: { display: true },
+                            tooltip: { enabled: true },
+                        },
+                    }}
+                />
             ) : (
                 <p>Loading chart data...</p>
             )}
@@ -34,4 +43,3 @@ const SummaryChart = () => {
 };
 
 export default SummaryChart;
-
