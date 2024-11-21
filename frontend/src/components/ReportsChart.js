@@ -24,7 +24,16 @@ const ReportsChart = () => {
         <div>
             <h2>Reports Chart</h2>
             {chartData ? (
-                <Line data={chartData} />
+                <Line
+                    data={chartData}
+                    options={{
+                        responsive: true,
+                        plugins: {
+                            legend: { display: true },
+                            tooltip: { enabled: true },
+                        },
+                    }}
+                />
             ) : (
                 <p>Loading chart data...</p>
             )}
@@ -34,4 +43,3 @@ const ReportsChart = () => {
 };
 
 export default ReportsChart;
-
