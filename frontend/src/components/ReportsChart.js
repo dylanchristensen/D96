@@ -28,7 +28,7 @@ const ReportsChart = () => {
             ) : (
                 <p>Loading chart data...</p>
             )}
-            <p>{description}</p>
+            <p>{description || "This chart showcases participation levels in workshops, events, and surveys at UNC Charlotte."}</p>
         </div>
     );
 };

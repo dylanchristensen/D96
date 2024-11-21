@@ -1,25 +1,33 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import SummaryChart from './components/SummaryChart';
-import ReportsChart from './components/ReportsChart';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import Summary from './pages/Summary';
+import Reports from './pages/Reports';
 
-const App = () => {
-    return (
-        <Router>
-            <div>
-                <h1>D96 Dashboard</h1>
-                <Routes>
-                    <Route path="/summary" element={<SummaryChart />} />
-                    <Route path="/reports" element={<ReportsChart />} />
-                    <Route
-                        path="*"
-                        element={<div><h2>404: Page Not Found</h2></div>}
-                    />
-                </Routes>
-            </div>
-        </Router>
-    );
-};
+function App() {
+  const isAuthenticated = !!localStorage.getItem('token'); // Check if JWT exists
+
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/summary"
+          element={isAuthenticated ? <Summary /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/reports"
+          element={isAuthenticated ? <Reports /> : <Navigate to="/login" />}
+        />
+      </Routes>
+    </Router>
+  );
+}
 
 export default App;
-
