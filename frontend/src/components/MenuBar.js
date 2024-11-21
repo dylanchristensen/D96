@@ -10,7 +10,7 @@ const MenuBar = () => {
     };
 
     return (
-        <nav>
+        <nav aria-label="Main Navigation">
             <ul>
                 <li><Link to="/dashboard">Dashboard</Link></li>
                 <li><Link to="/summary">Summary</Link></li>
