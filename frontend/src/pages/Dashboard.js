@@ -1,33 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { fetchDashboard } from '../services/api';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-function Dashboard() {
-  const [data, setData] = useState(null);
+const Dashboard = () => {
+  const [content, setContent] = useState({});
 
   useEffect(() => {
-    const getData = async () => {
+    const fetchData = async () => {
       try {
-        const { data } = await fetchDashboard();
-        setData(data);
+        const response = await axios.get("http:64.225.11.18:3000/dashboard", {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        });
+        setContent(response.data);
       } catch (err) {
-        console.error('Error fetching dashboard data:', err);
+        alert("Failed to fetch dashboard content!");
       }
     };
-    getData();
+    fetchData();
   }, []);
-
-  if (!data) return <p>Loading...</p>;
 
   return (
     <div>
-      <h1>Dashboard</h1>
-      <p>{data.summary}</p>
-      <a href={data.referenceUrl} target="_blank" rel="noopener noreferrer">
-        Source
-      </a>
-      <p>Tech Stack: {data.techStack}</p>
+      <h2>Dashboard</h2>
+      <p>{content.summary}</p>
+      <a href={content.referenceUrl}>Source</a>
+      <p>{content.techStack}</p>
     </div>
   );
-}
+};
 
 export default Dashboard;
