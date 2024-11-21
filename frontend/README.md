@@ -1,70 +1,193 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# D96 - UNC Charlotte News and Analytics
 
-## Available Scripts
+## Description
+D96 is a web application that provides insights into UNC Charlotte's recent sustainability initiatives. The app features user authentication, a dashboard with a summary of UNC Charlotte news, and dynamic charts showcasing participation in sustainability events and modes of transportation.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Features
+- **User Authentication:** Secure login using JWT tokens.
+- **Dashboard:** Displays a 200-word summary of UNC Charlotte's recent sustainability efforts.
+- **Dynamic Charts:** Interactive visualizations for:
+  - Participation in sustainability events over time.
+  - Modes of transportation adopted by students.
+- **Responsive Design:** Accessible and optimized for different devices.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack
+- **Frontend:**
+  - React.js with 'react-router-dom'
+  - Chart.js for data visualization
+  - Axios for API calls
+- **Backend:**
+  - Node.js with Express
+  - MongoDB for data storage
+  - JWT for authentication
+- **Deployment:**
+  - NGINX for serving the frontend and reverse proxying the backend
+  - PM2 for managing the backend process
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Setup Instructions
 
-### `npm run build`
+### Prerequisites
+- Node.js and npm installed
+- MongoDB installed and running
+- NGINX installed (for deployment)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Local Development
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### 1. Clone the repository
 
-### `npm run eject`
+git clone https://github.com/dylanchristensen/d96.git
+cd d96
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### 2. Backend Setup
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+cd backend
+npm install
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+Create a '.env' file in the 'backend' folder:
+env
+PORT=3000
+MONGO_URI=mongodb://dylan:dylan@localhost:27017/d96db?authSource=admin
+JWT_SECRET=your_jwt_secret
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Run the backend server:
 
-### Code Splitting
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+#### 3. Frontend Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+cd ../frontend
+npm install
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Create a '.env' file in the 'frontend' folder:
+env
+REACT_APP_BACKEND_URL=http://localhost:3000
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Run the frontend development server:
+
+npm start
+
+
+The app will be accessible at [http://localhost:3001](http://localhost:3001).
+
+---
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### 1. Build the Frontend
 
-### `npm run build` fails to minify
+cd frontend
+npm run build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+#### 2. Deploy with NGINX
+Create an NGINX configuration file at '/etc/nginx/sites-available/d96':
+nginx
+server {
+    listen 80;
+    server_name 64.225.11.18;
+
+    root /home/dylan/D96/frontend/build;
+    index index.html;
+
+    location / {
+        try_files $uri /index.html;
+    }
+
+    location /api/ {
+        proxy_pass http://localhost:3000/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+
+Enable the configuration and restart NGINX:
+
+sudo ln -s /etc/nginx/sites-available/d96 /etc/nginx/sites-enabled/
+sudo systemctl restart nginx
+
+
+#### 3. Use PM2 for Backend
+Install PM2 globally:
+
+npm install -g pm2
+
+
+Start the backend server with PM2:
+
+pm2 start backend/server.js --name backend
+pm2 save
+
+
+---
+
+## Example '.env' Files
+
+### Backend '.env'
+env
+PORT=3000
+MONGO_URI=mongodb://dylan:dylan@localhost:27017/d96db?authSource=admin
+JWT_SECRET=good job ricky
+
+
+### Frontend '.env'
+env
+REACT_APP_BACKEND_URL=http://64.225.11.18/api
+
+
+---
+
+## Deployment Script
+You can use the included 'deploy.sh' script to automate deployment:
+
+./deploy.sh
+
+
+This script:
+- Pulls the latest code from GitHub.
+- Builds the frontend.
+- Restarts NGINX.
+- Restarts the backend using PM2.
+
+---
+
+## Testing the App
+- Access the app via [http://64.225.11.18](http://64.225.11.18).
+- Login credentials:
+  - Username: 'dylan'
+  - Password: 'dylan'
+- Navigate through the dashboard, summary, and reports pages.
+
+---
+
+## Troubleshooting
+- **500 Internal Server Error:**
+  - Check the backend logs: 'pm2 logs backend'
+  - Check NGINX logs: 'sudo tail -f /var/log/nginx/error.log'
+
+- **Frontend Not Loading:**
+  - Ensure the 'frontend/build' folder exists.
+  - Restart NGINX after rebuilding the frontend.
+
+---
+
+
+
