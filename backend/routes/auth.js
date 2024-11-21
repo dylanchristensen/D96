@@ -1,30 +1,27 @@
-const express = require('express');
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
 
-const router = express.Router();
+const router = require('express').Router();
 
-const SECRET_KEY = process.env.JWT_SECRET; 
+// Replace with environment variable if needed
+const SECRET_KEY = process.env.JWT_SECRET || 'good job ricky';
 
-router.post('/login', async (req, res) => {
+// Hardcoded credentials
+const USERNAME = 'dylan';
+const PASSWORD = 'dylan';
+
+// Login route
+router.post('/login', (req, res) => {
     const { username, password } = req.body;
 
-    try {
-        const user = await User.findOne({
-            username: { $regex: new RegExp(`^${username}$`, 'i') },
-            password
-        });
-
-        if (!user) {
-            return res.status(401).json({ message: 'Invalid credentials' });
-        }
-
-        const token = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: '1h' });
-
-        res.json({ token });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+    // Check hardcoded credentials
+    if (username === USERNAME && password === PASSWORD) {
+        // Generate a JWT
+        const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' });
+        return res.json({ token });
     }
+
+    // Invalid credentials
+    return res.status(401).json({ message: 'Invalid credentials' });
 });
 
 module.exports = router;
