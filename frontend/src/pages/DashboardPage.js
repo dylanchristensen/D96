@@ -1,27 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { fetchDashboard } from "../services/api";
+import axios from "../services/api"; // Ensure it uses your `api.js` service
 
 const Dashboard = () => {
-  const [content, setContent] = useState({});
+  const [content, setContent] = useState({}); // State to hold dashboard content
+  const [error, setError] = useState(null); // State to capture errors
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDashboard = async () => {
       try {
-        const response = await fetchDashboard();
+        const response = await axios.get('/dashboard'); // Adjusted to use baseURL from .env
         setContent(response.data);
       } catch (err) {
-        console.error("Failed to fetch dashboard content:", err);
+        setError(err.response?.data?.message || "Failed to load dashboard content");
       }
     };
-    fetchData();
+
+    fetchDashboard();
   }, []);
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <div>
       <h2>Dashboard</h2>
-      <p>{content.summary}</p>
-      {content.referenceUrl && <a href={content.referenceUrl}>Source</a>}
-      <p>{content.techStack}</p>
+      {content.summary ? (
+        <>
+          <p>{content.summary}</p>
+          <a href={content.referenceUrl} target="_blank" rel="noopener noreferrer">Source</a>
+          <p>{content.techStack}</p>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
