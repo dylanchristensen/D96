@@ -17,12 +17,18 @@ API.interceptors.request.use((config) => {
 API.interceptors.response.use(
   (response) => response, // Pass through if successful
   (error) => {
-    console.error("API Error:", error.response?.data || error.message);
+    console.error("API Error Details:", {
+      message: error.message,
+      response: error.response?.data,
+      status: error.response?.status,
+      config: error.config,
+    });
+
     if (error.response?.status === 401) {
-      // Optional: Redirect to login if unauthorized
       localStorage.removeItem('token');
       window.location.href = '/login';
     }
+
     return Promise.reject(error);
   }
 );
