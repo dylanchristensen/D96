@@ -2,9 +2,9 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-const router = express.Router(); // <-- Define the router here
+const router = express.Router();
 
-const SECRET_KEY = 'good job ricky';
+const SECRET_KEY = process.env.JWT_SECRET; 
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -27,5 +27,4 @@ router.post('/login', async (req, res) => {
     }
 });
 
-module.exports = router; // <-- Export the router here
-
+module.exports = router;
