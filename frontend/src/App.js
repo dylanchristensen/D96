@@ -1,13 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import Summary from "./pages/Summary";
-import Reports from "./pages/Reports";
+import { isAuthenticated } from "./auth"; // Import authentication check
+import Login from "./pages/LoginPage";
+import Dashboard from "./pages/DashboardPage";
+import SummaryPage from "./pages/SummaryPage";
+import ReportsPage from "./pages/ReportsPage"; 
+
+// ProtectedRoute Component
+const ProtectedRoute = ({ children }) => {
+  return isAuthenticated() ? children : <Navigate to="/login" />;
+};
 
 const App = () => {
-  const isAuthenticated = () => !!localStorage.getItem("token");
-
   return (
     <Router>
       <Routes>
@@ -15,15 +19,27 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route
           path="/dashboard"
-          element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/summary"
-          element={isAuthenticated() ? <Summary /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute>
+              <SummaryPage />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/reports"
-          element={isAuthenticated() ? <Reports /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute>
+              <ReportsPage />
+            </ProtectedRoute>
+          }
         />
       </Routes>
     </Router>
