@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
-import axios from "../services/api"; // Ensure it uses your `api.js` service
+import { fetchDashboard } from "../services/api";
+
 
 const Dashboard = () => {
   const [content, setContent] = useState({}); // State to hold dashboard content
   const [error, setError] = useState(null); // State to capture errors
 
   useEffect(() => {
-    const fetchDashboard = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get('/dashboard'); // Adjusted to use baseURL from .env
+        const response = await fetchDashboard(); 
         setContent(response.data);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to load dashboard content");
       }
     };
-
-    fetchDashboard();
+  
+    fetchData();
   }, []);
+  
 
   if (error) {
     return <p>Error: {error}</p>;
