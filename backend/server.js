@@ -9,7 +9,6 @@ const dashboardRoutes = require('./routes/dashboard');
 // Environment variables
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/defaultdb';
-const JWT_SECRET = process.env.JWT_SECRET || 'default_secret';
 
 const app = express();
 
