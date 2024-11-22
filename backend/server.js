@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const chartDataRoutes = require('./routes/chartData');
+const dashboardRoutes = require('./routes/dashboard'); 
 
 // Environment variables
 const PORT = process.env.PORT || 3000;
@@ -19,6 +20,7 @@ app.use(express.json());
 // Routes
 app.use('/auth', authRoutes);
 app.use('/chartData', chartDataRoutes);
+app.use('/dashboard', dashboardRoutes);
 
 // MongoDB connection
 mongoose
