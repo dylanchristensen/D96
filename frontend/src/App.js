@@ -1,5 +1,46 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { isAuthenticated } from "./services/auth";
+import MenuBar from "./components/MenuBar"; 
+import Login from "./pages/LoginPage";
+import Dashboard from "./pages/DashboardPage";
+import Summary from "./pages/SummaryPage";
+import Reports from "./pages/ReportsPage";
+
+const App = () => {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  };
+
+  return (
+    <Router>
+      {isAuthenticated() && <MenuBar handleLogout={handleLogout} />} {/* Show menu bar if authenticated */}
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/summary"
+          element={isAuthenticated() ? <Summary /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/reports"
+          element={isAuthenticated() ? <Reports /> : <Navigate to="/login" />}
+        />
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;
+
+/**
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { isAuthenticated } from "./auth"; // Import authentication check
 import Login from "./pages/LoginPage";
 import Dashboard from "./pages/DashboardPage";
@@ -47,3 +88,4 @@ const App = () => {
 };
 
 export default App;
+ */
