@@ -27,7 +27,7 @@ fi
 
 # Step 4: Restart NGINX
 echo "Restarting NGINX..."
-if ! sudo systemctl restart nginx; then
+if ! sudo /bin/systemctl restart nginx; then
   echo "Failed to restart NGINX. Exiting..."
   exit 1
 fi
