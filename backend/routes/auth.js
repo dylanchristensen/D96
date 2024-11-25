@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const router = require('express').Router();
 
 // Replace with environment variable if needed
-const SECRET_KEY = process.env.JWT_SECRET || 'good job ricky';
+const SECRET_KEY = process.env.SECRET_KEY || 'good job ricky';
 
 // Hardcoded credentials
 const USERNAME = 'dylan';

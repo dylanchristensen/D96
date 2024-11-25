@@ -37,7 +37,7 @@ const SummaryChart = () => {
             ) : (
                 <p>Loading chart data...</p>
             )}
-            <p>{description || "This chart represents the percentage breakdown of UNC Charlotte’s recent waste management improvements."}</p>
+            <p>{description || "This chart represents the percentage breakdown of UNC Charlotte's recent waste management improvements."}</p>
         </div>
     );
 };

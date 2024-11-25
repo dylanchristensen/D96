@@ -2,8 +2,9 @@
 
 echo "Starting deployment process..."
 
-# Step 1: Navigate to the project root
-cd ~/D96 || { echo "Failed to navigate to ~/D96"; exit 1; }
+# Step 1: Navigate to the project root dynamically
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR" || { echo "Failed to navigate to script directory"; exit 1; }
 
 # Step 2: Pull the latest changes from the GitHub repository
 echo "Pulling latest changes from GitHub..."
@@ -14,7 +15,7 @@ fi
 
 # Step 3: Build the frontend
 echo "Building the frontend..."
-cd frontend || { echo "Failed to navigate to frontend"; exit 1; }
+cd "$SCRIPT_DIR/frontend" || { echo "Failed to navigate to frontend"; exit 1; }
 if ! npm install; then
   echo "Frontend npm install failed. Exiting..."
   exit 1
@@ -34,7 +35,7 @@ fi
 
 # Step 5: Restart the backend with PM2
 echo "Restarting backend with PM2..."
-cd ../backend || { echo "Failed to navigate to backend"; exit 1; }
+cd "$SCRIPT_DIR/backend" || { echo "Failed to navigate to backend"; exit 1; }
 if ! npm install; then
   echo "Backend npm install failed. Exiting..."
   exit 1
