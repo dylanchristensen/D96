@@ -72,3 +72,5 @@ Thumbs.db
 .rts2_cache_*/
 .fusebox/
 .serverless/
+
+package-lock.json
