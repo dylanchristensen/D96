@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const authenticate = require('../middleware/authMiddleware'); // Middleware for authentication
 
-// Chart data based on UNC Charlotte sustainability initiatives
+// Chart data for UNC Charlotte sustainability initiatives
 const summaryChartData = {
     labels: ['Recycling', 'Composting', 'Waste Reduction'],
     datasets: [
@@ -24,23 +25,37 @@ const reportsChartData = {
     ],
 };
 
-// Endpoint for summary chart data
-router.get('/summary', (req, res) => {
-    res.json({
-        chartType: 'bar',
-        data: summaryChartData,
-        description: 'Percentage breakdown of UNC Charlotte’s recent waste management improvements.',
-    });
+// Base endpoint for /chartData (no authentication required)
+router.get('/', (req, res) => {
+    res.status(200).json({ message: 'Chart data route is working' });
 });
 
-// Endpoint for reports chart data
-router.get('/reports', (req, res) => {
-    res.json({
-        chartType: 'line',
-        data: reportsChartData,
-        description: 'Participation levels in workshops, events, and surveys at UNC Charlotte.',
-    });
+// Protected endpoint for summary chart data
+router.get('/summary', authenticate, (req, res) => {
+    try {
+        res.status(200).json({
+            chartType: 'bar',
+            data: summaryChartData,
+            description: 'Percentage breakdown of UNC Charlotte’s recent waste management improvements.',
+        });
+    } catch (error) {
+        console.error('Error in /chartData/summary:', { error: error.message, route: req.path });
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+// Protected endpoint for reports chart data
+router.get('/reports', authenticate, (req, res) => {
+    try {
+        res.status(200).json({
+            chartType: 'line',
+            data: reportsChartData,
+            description: 'Participation levels in workshops, events, and surveys at UNC Charlotte.',
+        });
+    } catch (error) {
+        console.error('Error in /chartData/reports:', { error: error.message, route: req.path });
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
 });
 
 module.exports = router;
-

@@ -62,3 +62,4 @@ sudo systemctl restart nginx || { echo "Failed to restart NGINX. Please check yo
 pm2 restart backend || pm2 start server.js --name backend
 
 echo "Project setup and deployment completed successfully!"
+ 
