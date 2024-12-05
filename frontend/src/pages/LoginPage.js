@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { login } from "../services/api";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); // State for displaying error messages
@@ -14,6 +14,7 @@ const Login = () => {
       const response = await login({ username, password });
       localStorage.setItem("token", response.data.token);
       setError(""); // Clear any previous errors
+      onLogin(); // Notify the parent component of successful login
       navigate("/dashboard");
     } catch (err) {
       console.error("Login failed:", err);
@@ -24,7 +25,7 @@ const Login = () => {
   return (
     <form onSubmit={handleSubmit} aria-label="Login Form">
       <h2>Login</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>} {/* Display error messages */}
+      {error && <p className="error-message">{error}</p>} {/* Display error messages */}
       <div>
         <label htmlFor="username">Username</label>
         <input
