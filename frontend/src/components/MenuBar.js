@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { isAuthenticated } from '../services/auth';
-import './index.css';
+import '../index.css';
 
 
 const MenuBar = () => {
