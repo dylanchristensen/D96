@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+
 import { useAuth } from "./context/AuthContext"; // Use the AuthContext
 import MenuBar from "./components/MenuBar";
 import Login from "./pages/LoginPage";

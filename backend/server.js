@@ -2,9 +2,23 @@ require('dotenv').config(); // Load .env variables
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const authRoutes = require('./routes/auth');
-const chartDataRoutes = require('./routes/chartData');
-const dashboardRoutes = require('./routes/dashboard');
+const winston = require('winston'); // Logging library
+
+// Set up Winston logger
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.printf(({ timestamp, level, message }) => {
+            return `${timestamp} [${level.toUpperCase()}]: ${message}`;
+        })
+    ),
+    transports: [
+        new winston.transports.Console({ format: winston.format.colorize() }), // Console transport
+        new winston.transports.File({ filename: 'logs/app.log', level: 'info' }), // File transport for info logs
+        new winston.transports.File({ filename: 'logs/error.log', level: 'error' }) // File transport for errors
+    ]
+});
 
 // Environment variables
 const PORT = process.env.PORT || 3000;
@@ -22,34 +36,39 @@ app.get('/', (req, res) => {
 });
 
 // Routes
+const authRoutes = require('./routes/auth');
+const chartDataRoutes = require('./routes/chartData');
+const dashboardRoutes = require('./routes/dashboard');
+
 app.use('/auth', authRoutes);
 app.use('/chartData', chartDataRoutes);
 app.use('/dashboard', dashboardRoutes);
 
 // Catch-all for undefined routes
 app.use((req, res) => {
+    logger.warn(`404 - Route not found: ${req.originalUrl}`);
     res.status(404).json({ message: 'Route not found' });
 });
 
 // MongoDB connection
 mongoose
     .connect(MONGO_URI)
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => {
-        console.error('MongoDB connection error:', err);
+    .then(() => logger.info('MongoDB connected'))
+    .catch((err) => {
+        logger.error(`MongoDB connection error: ${err.message}`);
         process.exit(1); // Exit if unable to connect
     });
 
 // Global error handler
 app.use((err, req, res, next) => {
-    console.error('Global Error:', err.message);
+    logger.error(`Global Error: ${err.message}`);
     if (!res.headersSent) {
         res.status(500).json({ message: 'Internal Server Error' });
     }
-    next(err); // Pass error to the default Express handler
+    next(); // Pass error to the default Express handler
 });
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    logger.info(`Server running on http://localhost:${PORT}`);
 });
