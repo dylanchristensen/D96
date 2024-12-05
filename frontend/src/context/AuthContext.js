@@ -1,7 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-import { isAuthenticated as checkAuth } from "../services/auth";
-
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
