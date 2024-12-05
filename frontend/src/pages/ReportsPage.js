@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { fetchChartReports } from "../services/api";
 import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
+import { Navigate } from "react-router-dom";
+import { isAuthenticated } from "../auth"; // Import auth function
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const Reports = () => {
+  if (!isAuthenticated()) return <Navigate to="/login" />;
+
   const [chartData, setChartData] = useState(null);
   const [description, setDescription] = useState("");
 
