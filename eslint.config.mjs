@@ -5,6 +5,9 @@ import pluginImport from "eslint-plugin-import";
 
 export default [
   {
+    ignores: ["build/", "dist/", "node_modules/", "*.log", ".tmp/"], // Consolidated ignore patterns
+  },
+  {
     files: ["**/*.{js,mjs,cjs,jsx}"],
     languageOptions: {
       parserOptions: {
@@ -32,8 +35,7 @@ export default [
           "newlines-between": "always",
         },
       ],
-      "no-console": ["warn", { allow: ["warn", "error"] }], // Enforce semicolons
-    
+      "no-console": ["warn", { allow: ["warn", "error"] }], // Allow specific console usage
     },
   },
 ];
