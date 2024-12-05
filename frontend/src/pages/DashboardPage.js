@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchDashboard } from "../services/api";
+import { isAuthenticated } from "../services/auth"; // Import auth function
 
 
 const Dashboard = () => {

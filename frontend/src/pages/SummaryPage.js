@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchChartSummary } from "../services/api";
 import { Line } from "react-chartjs-2";
 import { Navigate } from "react-router-dom";
-import { isAuthenticated } from "../auth";
+import { isAuthenticated } from "../services/auth"; // Import auth function
 import {
   Chart as ChartJS,
   CategoryScale,
