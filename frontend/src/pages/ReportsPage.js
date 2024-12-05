@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { fetchChartReports } from "../services/api";
-import { Bar } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2"; // Using Pie chart
 import { Navigate } from "react-router-dom";
-import { isAuthenticated } from "../services/auth"; // Import auth function
+import { isAuthenticated } from "../services/auth";
+import { fetchChartReports } from "../services/api"; // API call for reports
 import {
   Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
+  ArcElement, // Required for Pie charts
   Tooltip,
   Legend,
 } from "chart.js";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Reports = () => {
+const ReportsPage = () => {
   if (!isAuthenticated()) return <Navigate to="/login" />;
 
   const [chartData, setChartData] = useState(null);
   const [description, setDescription] = useState("");
-  const [error, setError] = useState(null); // Capture errors
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchChartData = async () => {
@@ -34,6 +31,7 @@ const Reports = () => {
         setError("Failed to load chart data. Please try again later.");
       }
     };
+
     fetchChartData();
   }, []);
 
@@ -44,7 +42,7 @@ const Reports = () => {
     <div className="page-container">
       <h2 className="page-header">Reports</h2>
       <div className="chart-container">
-        <Bar
+        <Pie
           data={{
             labels: chartData.labels,
             datasets: chartData.datasets,
@@ -52,8 +50,8 @@ const Reports = () => {
           options={{
             responsive: true,
             plugins: {
-              legend: { position: "top" },
-              title: { display: true, text: "Reports Chart" },
+              legend: { display: true, position: "bottom" },
+              tooltip: { enabled: true },
             },
           }}
         />
@@ -63,4 +61,4 @@ const Reports = () => {
   );
 };
 
-export default Reports;
+export default ReportsPage;

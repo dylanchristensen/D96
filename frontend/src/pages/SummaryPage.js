@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { fetchChartSummary } from "../services/api";
 import { Line } from "react-chartjs-2";
 import { Navigate } from "react-router-dom";
 import { isAuthenticated } from "../services/auth";
+import { fetchChartSummary } from "../services/api";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,12 +16,12 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const Summary = () => {
+const SummaryPage = () => {
   if (!isAuthenticated()) return <Navigate to="/login" />;
 
   const [chartData, setChartData] = useState(null);
   const [description, setDescription] = useState("");
-  const [error, setError] = useState(null); // Error state for handling issues
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchChartData = async () => {
@@ -29,7 +29,7 @@ const Summary = () => {
         const response = await fetchChartSummary();
         setChartData(response.data.data);
         setDescription(response.data.description);
-        setError(null); // Clear previous errors
+        setError(null); // Clear any previous errors
       } catch (err) {
         console.error("Failed to fetch summary chart data:", err);
         setError("Failed to load chart data. Please try again later.");
@@ -52,9 +52,25 @@ const Summary = () => {
           }}
           options={{
             responsive: true,
+            maintainAspectRatio: false, // Allow chart to adjust to container
             plugins: {
-              legend: { position: "top" },
-              title: { display: true, text: "Summary Chart" },
+              legend: { display: true, position: "top" },
+              tooltip: { enabled: true },
+              title: { display: true, text: "Participation in Sustainability Events" },
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Year",
+                },
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "Participants",
+                },
+              },
             },
           }}
         />
@@ -64,4 +80,4 @@ const Summary = () => {
   );
 };
 
-export default Summary;
+export default SummaryPage;
