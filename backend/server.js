@@ -14,14 +14,9 @@ const logger = winston.createLogger({
         })
     ),
     transports: [
-        new winston.transports.Console({
-            format: winston.format.combine(
-                winston.format.colorize(),
-                winston.format.simple()
-            )
-        }),
-        new winston.transports.File({ filename: 'logs/app.log', level: 'info' }),
-        new winston.transports.File({ filename: 'logs/error.log', level: 'error' })
+        new winston.transports.Console({ format: winston.format.colorize() }), // Console transport
+        new winston.transports.File({ filename: 'logs/app.log', level: 'info' }), // File transport for info logs
+        new winston.transports.File({ filename: 'logs/error.log', level: 'error' }) // File transport for errors
     ]
 });
 
@@ -29,33 +24,27 @@ const logger = winston.createLogger({
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/defaultdb';
 
-// Initialize Express app
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-// Root endpoint
+// Default route
 app.get('/', (req, res) => {
     res.status(200).json({ message: 'API is running. Use /auth, /chartData, or /dashboard' });
 });
 
 // Routes
-try {
-    const authRoutes = require('./routes/auth');
-    const chartDataRoutes = require('./routes/chartData');
-    const dashboardRoutes = require('./routes/dashboard');
+const authRoutes = require('./routes/auth');
+const chartDataRoutes = require('./routes/chartData');
+const dashboardRoutes = require('./routes/dashboard');
 
-    app.use('/auth', authRoutes);
-    app.use('/chartData', chartDataRoutes);
-    app.use('/dashboard', dashboardRoutes);
-} catch (err) {
-    logger.error(`Failed to load routes: ${err.message}`);
-    throw new Error("Critical error loading routes. Ensure all routes are correctly defined.");
-}
+app.use('/auth', authRoutes);
+app.use('/chartData', chartDataRoutes);
+app.use('/dashboard', dashboardRoutes);
 
-// 404 Catch-all for undefined routes
+// Catch-all for undefined routes
 app.use((req, res) => {
     logger.warn(`404 - Route not found: ${req.originalUrl}`);
     res.status(404).json({ message: 'Route not found' });
@@ -63,13 +52,11 @@ app.use((req, res) => {
 
 // MongoDB connection
 mongoose
-    .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        logger.info('MongoDB connected successfully');
-    })
+    .connect(MONGO_URI)
+    .then(() => logger.info('MongoDB connected'))
     .catch((err) => {
         logger.error(`MongoDB connection error: ${err.message}`);
-        process.exit(1); // Exit the process on critical error
+        throw new Error("Server encountered a critical error and will shut down.");
     });
 
 // Global error handler
@@ -78,9 +65,10 @@ app.use((err, req, res, next) => {
     if (!res.headersSent) {
         res.status(500).json({ message: 'Internal Server Error' });
     }
+    next(); // Pass error to the default Express handler
 });
 
 // Start the server
 app.listen(PORT, () => {
-    logger.info(`Server is running on http://localhost:${PORT}`);
+    logger.info(`Server running on http://localhost:${PORT}`);
 });
