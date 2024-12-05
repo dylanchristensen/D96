@@ -2,7 +2,7 @@
 
 echo "Starting project setup..."
 
-# Check and install system dependencies
+# System Dependencies
 declare -a tools=("sudo" "npm" "pm2" "nginx" "git")
 for tool in "${tools[@]}"; do
     if ! command -v $tool &> /dev/null; then
@@ -23,7 +23,7 @@ for tool in "${tools[@]}"; do
     fi
 done
 
-# Ensure Node.js and npm are up-to-date
+# Node.js and npm setup
 if ! command -v node &> /dev/null; then
     echo "Node.js not found. Installing..."
     curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
@@ -33,7 +33,7 @@ else
     echo "NPM version: $(npm -v)"
 fi
 
-# Ensure PM2 is installed globally
+# PM2 setup
 if ! command -v pm2 &> /dev/null; then
     echo "PM2 not found. Installing globally..."
     npm install -g pm2
@@ -41,25 +41,25 @@ else
     echo "PM2 is already installed."
 fi
 
-# Navigate to project directory
+# Project Setup
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR" || { echo "Failed to navigate to script directory"; exit 1; }
 
-# Install dependencies and build frontend
 echo "Setting up frontend..."
 cd "$SCRIPT_DIR/frontend" || { echo "Frontend directory not found"; exit 1; }
-npm install
+if [ ! -d "node_modules" ]; then
+  npm install
+fi
 npm run build
 
-# Install dependencies for backend
 echo "Setting up backend..."
 cd "$SCRIPT_DIR/backend" || { echo "Backend directory not found"; exit 1; }
-npm install
+if [ ! -d "node_modules" ]; then
+  npm install
+fi
 
-# Restart services
 echo "Restarting services..."
 sudo systemctl restart nginx || { echo "Failed to restart NGINX. Please check your setup."; exit 1; }
 pm2 restart backend || pm2 start server.js --name backend
 
 echo "Project setup and deployment completed successfully!"
- 

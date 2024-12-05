@@ -34,7 +34,16 @@ run_command git pull origin main
 # Step 3: Build the frontend
 echo "$(date +"%Y-%m-%d %H:%M:%S") - Building the frontend..."
 navigate_to "$SCRIPT_DIR/frontend"
-run_command npm install
+
+if [ ! -d "node_modules" ]; then
+  echo "$(date +"%Y-%m-%d %H:%M:%S") - Installing frontend dependencies..."
+  run_command npm install
+else
+  echo "$(date +"%Y-%m-%d %H:%M:%S") - Skipping npm install for frontend (node_modules exists)"
+fi
+
+echo "$(date +"%Y-%m-%d %H:%M:%S") - Cleaning previous build..."
+rm -rf build
 run_command npm run build
 
 # Step 4: Restart NGINX
@@ -49,7 +58,13 @@ fi
 # Step 5: Restart the backend with PM2
 echo "$(date +"%Y-%m-%d %H:%M:%S") - Restarting backend with PM2..."
 navigate_to "$SCRIPT_DIR/backend"
-run_command npm install
+
+if [ ! -d "node_modules" ]; then
+  echo "$(date +"%Y-%m-%d %H:%M:%S") - Installing backend dependencies..."
+  run_command npm install
+else
+  echo "$(date +"%Y-%m-%d %H:%M:%S") - Skipping npm install for backend (node_modules exists)"
+fi
 
 if pm2 list | grep -q "backend"; then
   run_command pm2 restart backend
