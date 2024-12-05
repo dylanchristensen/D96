@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import './style.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { AuthProvider } from './AuthContext'; // Add this import
+import { AuthProvider } from './context/AuthContext'; // Add this import
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
