@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = process.env.SECRET_KEY || 'good job ricky'; // Fallback if config file is unavailable
 
