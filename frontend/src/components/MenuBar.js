@@ -1,13 +1,15 @@
 import React, { memo } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { isAuthenticated } from '../services/auth';
+
+import { useAuth } from "../context/AuthContext";
 import './MenuBar.css';
 
 const MenuBar = () => {
     const navigate = useNavigate();
+    const { isAuthenticated, logout } = useAuth(); // Use context for authentication state and logout function
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
+        logout(); // Call centralized logout from context
         navigate('/login');
     };
 
@@ -42,7 +44,7 @@ const MenuBar = () => {
                     </NavLink>
                 </li>
             </ul>
-            {isAuthenticated() && (
+            {isAuthenticated && (
                 <button 
                     className="logout-button" 
                     onClick={handleLogout}
