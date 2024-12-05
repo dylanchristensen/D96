@@ -1,17 +1,17 @@
 /* Root Variables */
 :root {
-  --primary-color: #2c3e50;
-  --secondary-color: #34495e;
-  --accent-color: #3498db;
-  --background-color: #f5f5f5; /* Subtle gray background */
-  --text-color: #2c3e50;
-  --link-hover: #1abc9c;
+  --primary-color: #2c3e50; /* Rich navy */
+  --secondary-color: #34495e; /* Deep gray */
+  --accent-color: #3498db; /* Calm blue */
+  --background-color: #f5f5f5; /* Light gray */
+  --text-color: #2c3e50; /* Dark text */
+  --link-hover: #1abc9c; /* Subtle green */
 
-  --menu-bg-color: #282c34;
-  --menu-hover-color: #3a4a5c;
-  --menu-active-color: #4CAF50;
+  --menu-bg-color: #1a1a2e; /* Darker background for menu */
+  --menu-hover-color: #2a2a40;
+  --menu-active-color: #4CAF50; /* Highlight green */
   --menu-text-color: #ffffff;
-  --menu-text-hover-color: #f0f0f0;
+  --menu-text-hover-color: #e0e0e0;
   --font-family: 'Georgia', 'Cambria', 'Times New Roman', Times, serif;
 }
 
@@ -21,51 +21,40 @@ body {
   font-family: var(--font-family);
   background-color: var(--background-color);
   color: var(--text-color);
-  line-height: 1.6;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  line-height: 1.8; /* Slightly increased for readability */
 }
 
 /* General Layout */
 .container {
   max-width: 960px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 2rem;
 }
 
 /* Page Container */
 .page-container {
-  max-width: 800px;
-  margin: 2rem auto;
+  max-width: 900px;
+  margin: 2.5rem auto;
   padding: 2rem;
   background-color: var(--background-color);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Page Header */
-.page-header {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--primary-color);
-  text-align: center;
-  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 /* Typography */
 h1, h2, h3 {
   color: var(--primary-color);
+  font-weight: 600; /* Slightly bold */
 }
 
 p {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
 }
 
 a {
   color: var(--accent-color);
   text-decoration: none;
+  font-weight: 500; /* Subtle bold for emphasis */
 }
 
 a:hover {
@@ -73,34 +62,26 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Login Page Styles */
+/* Login Page */
 .login-container {
-  max-width: 400px;
+  max-width: 450px;
   margin: 5rem auto;
-  padding: 2rem;
+  padding: 2.5rem;
   background-color: var(--background-color);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Deep shadow for a premium look */
 }
 
 .login-header {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: bold;
   color: var(--primary-color);
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-label {
@@ -112,58 +93,53 @@ a:hover {
   font-size: 1rem;
   padding: 0.8rem;
   border: 1px solid var(--secondary-color);
-  border-radius: 4px;
+  border-radius: 6px;
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-input:focus {
   border-color: var(--accent-color);
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.5);
 }
 
 .form-button {
-  padding: 0.8rem;
+  padding: 0.8rem 1rem;
   font-size: 1.2rem;
   background-color: var(--accent-color);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-button:hover {
   background-color: var(--link-hover);
-}
-
-.error-message {
-  color: red;
-  font-size: 0.9rem;
-  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Chart Container */
 .chart-container {
-  width: 100%;
-  max-width: 800px;
-  height: 400px; /* Consistent height for all charts */
-  margin: 2rem auto;
-  padding: 1rem;
-  background-color: white;
+  margin: 2.5rem auto;
+  padding: 2rem;
+  max-width: 900px;
+  background: #ffffff;
   border: 1px solid var(--secondary-color);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Increased shadow */
+}
+
+.chart-header {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .chart-description {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: var(--secondary-color);
   text-align: center;
-  margin-top: 1rem;
-}
-
-.loading-message {
-  color: var(--secondary-color);
-  text-align: center;
-  font-size: 1.2rem;
+  margin-top: 1.5rem;
 }

@@ -38,7 +38,7 @@ const ReportsChart = () => {
 
     return (
         <div className="chart-container">
-            <h2 className="page-header">Reports Chart</h2>
+            <h2 className="chart-header">Reports</h2>
             {chartData ? (
                 <Line
                     data={chartData}
@@ -46,10 +46,19 @@ const ReportsChart = () => {
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { display: true },
+                            legend: { display: true, position: 'top' },
                             tooltip: { enabled: true },
                         },
+                        layout: {
+                            padding: {
+                                left: 16,
+                                right: 16,
+                                top: 16,
+                                bottom: 16,
+                            },
+                        },
                     }}
+                    height={400}
                 />
             ) : (
                 <p className="loading-message">Loading chart data...</p>
