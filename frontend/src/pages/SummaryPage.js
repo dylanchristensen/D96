@@ -13,7 +13,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import "../index.css"; // Import global styles
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
