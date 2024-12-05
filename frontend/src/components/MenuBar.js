@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { isAuthenticated } from '../services/auth';
-import '../index.css';
-
 
 const MenuBar = () => {
     const navigate = useNavigate();
@@ -44,6 +42,7 @@ const MenuBar = () => {
                         <button 
                             className="menu-bar-link logout-button" 
                             onClick={handleLogout}
+                            aria-label="Logout"
                         >
                             Logout
                         </button>
@@ -54,4 +53,4 @@ const MenuBar = () => {
     );
 };
 
-export default MenuBar;
+export default memo(MenuBar);

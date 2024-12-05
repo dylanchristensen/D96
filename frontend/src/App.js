@@ -6,7 +6,6 @@ import Login from "./pages/LoginPage";
 import Dashboard from "./pages/DashboardPage";
 import Summary from "./pages/SummaryPage";
 import Reports from "./pages/ReportsPage";
-import "./index.css"; 
 
 
 // ProtectedRoute Component
