@@ -1,12 +1,11 @@
 /* MenuBar */
 .menu-bar {
   background-color: var(--menu-bg-color);
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhance the shadow for a premium look */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Add a subtle border */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Favicon */
@@ -15,8 +14,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  overflow: hidden; /* Ensure the image fits perfectly */
-  margin-right: 1.5rem;
+  margin-right: 1rem;
 }
 
 .favicon {
@@ -29,8 +27,8 @@
 .menu-bar-list {
   list-style: none;
   display: flex;
-  gap: 2.5rem; /* Increase spacing for a luxurious feel */
-  margin: 0 auto;
+  gap: 2rem;
+  margin: 0;
   padding: 0;
   flex-grow: 1;
   justify-content: center;
@@ -45,40 +43,36 @@
 .menu-bar-link {
   text-decoration: none;
   color: var(--menu-text-color);
-  font-size: 1.1rem;
-  padding: 0.6rem 1.2rem;
-  border-radius: 5px;
-  font-weight: 500; /* Slightly bold text for elegance */
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .menu-bar-link:hover {
   background-color: var(--menu-hover-color);
   color: var(--menu-text-hover-color);
-  transform: scale(1.05); /* Slight scale for interaction feedback */
 }
 
 .menu-bar-link.active {
   background-color: var(--menu-active-color);
   color: var(--menu-text-hover-color);
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15); /* Add a highlight effect */
 }
 
 /* Logout Button Positioned Right */
 .logout-button {
   border: none;
   background: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--menu-text-color);
-  padding: 0.6rem 1.2rem;
-  border-radius: 5px;
-  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
+  margin-left: auto; /* Align logout to the far right */
 }
 
 .logout-button:hover {
   background-color: var(--menu-hover-color);
   color: var(--menu-text-hover-color);
-  transform: scale(1.05); /* Matches hover interaction for links */
 }

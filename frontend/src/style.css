@@ -64,59 +64,73 @@ a:hover {
 
 /* Login Page */
 .login-container {
-  max-width: 450px;
+  max-width: 400px;
   margin: 5rem auto;
-  padding: 2.5rem;
+  padding: 3rem;
   background-color: var(--background-color);
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Deep shadow for a premium look */
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Slightly larger shadow for elegance */
 }
 
 .login-header {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: bold;
   color: var(--primary-color);
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  font-family: var(--font-family); /* Apply premium font */
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
 }
 
 .form-label {
   font-size: 1rem;
   color: var(--secondary-color);
+  margin-bottom: 0.5rem;
+  display: block; /* Ensure alignment */
 }
 
 .form-input {
   font-size: 1rem;
-  padding: 0.8rem;
+  padding: 0.9rem;
   border: 1px solid var(--secondary-color);
-  border-radius: 6px;
+  border-radius: 8px;
   outline: none;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%; /* Ensure proper alignment and fill */
 }
 
 .form-input:focus {
   border-color: var(--accent-color);
-  box-shadow: 0 0 6px rgba(52, 152, 219, 0.5);
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.5); /* Softer shadow effect */
 }
 
 .form-button {
-  padding: 0.8rem 1rem;
+  padding: 0.9rem 1.2rem;
   font-size: 1.2rem;
   background-color: var(--accent-color);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%; /* Button spans full width */
+  font-weight: bold;
 }
 
 .form-button:hover {
   background-color: var(--link-hover);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Refined shadow on hover */
+}
+
+.error-message {
+  color: #e74c3c; /* Use a refined red for error messages */
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
 }
 
 /* Chart Container */

@@ -29,15 +29,11 @@ const SummaryChart = () => {
         };
 
         fetchChartData();
-
-        return () => {
-            ChartJS.unregister(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-        };
     }, []);
 
     return (
         <div className="chart-container">
-            <h2 className="chart-header">Summary</h2>
+            <h2 className="page-header">Summary Chart</h2>
             {chartData ? (
                 <Bar
                     data={chartData}
@@ -45,19 +41,10 @@ const SummaryChart = () => {
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { display: true, position: 'top' },
+                            legend: { display: true },
                             tooltip: { enabled: true },
                         },
-                        layout: {
-                            padding: {
-                                left: 16,
-                                right: 16,
-                                top: 16,
-                                bottom: 16,
-                            },
-                        },
                     }}
-                    height={400}
                 />
             ) : (
                 <p className="loading-message">Loading chart data...</p>
