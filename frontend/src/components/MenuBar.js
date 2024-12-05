@@ -1,50 +1,52 @@
 import React from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { isAuthenticated } from '../services/auth'; // Reuse auth function
-import './MenuBar.css';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { isAuthenticated } from '../services/auth';
+import './index.css';
+
 
 const MenuBar = () => {
     const navigate = useNavigate();
-    const location = useLocation(); // Get current route for comparison
 
     const handleLogout = () => {
-        localStorage.removeItem('token'); // Clear JWT
-        navigate('/login'); // Redirect to login page
+        localStorage.removeItem('token');
+        navigate('/login');
     };
 
     return (
-        <nav aria-label="Main Navigation">
-            <ul>
-                <li>
-                    <Link
-                        to="/dashboard"
-                        className={location.pathname === '/dashboard' ? 'disabled-link' : ''}
-                        onClick={(e) => location.pathname === '/dashboard' && e.preventDefault()}
+        <nav className="menu-bar" aria-label="Main Navigation">
+            <ul className="menu-bar-list">
+                <li className="menu-bar-item">
+                    <NavLink 
+                        to="/dashboard" 
+                        className={({ isActive }) => isActive ? 'menu-bar-link active' : 'menu-bar-link'}
                     >
                         Dashboard
-                    </Link>
+                    </NavLink>
                 </li>
-                <li>
-                    <Link
-                        to="/summary"
-                        className={location.pathname === '/summary' ? 'disabled-link' : ''}
-                        onClick={(e) => location.pathname === '/summary' && e.preventDefault()}
+                <li className="menu-bar-item">
+                    <NavLink 
+                        to="/summary" 
+                        className={({ isActive }) => isActive ? 'menu-bar-link active' : 'menu-bar-link'}
                     >
                         Summary
-                    </Link>
+                    </NavLink>
                 </li>
-                <li>
-                    <Link
-                        to="/reports"
-                        className={location.pathname === '/reports' ? 'disabled-link' : ''}
-                        onClick={(e) => location.pathname === '/reports' && e.preventDefault()}
+                <li className="menu-bar-item">
+                    <NavLink 
+                        to="/reports" 
+                        className={({ isActive }) => isActive ? 'menu-bar-link active' : 'menu-bar-link'}
                     >
                         Reports
-                    </Link>
+                    </NavLink>
                 </li>
                 {isAuthenticated() && (
-                    <li>
-                        <button onClick={handleLogout}>Logout</button>
+                    <li className="menu-bar-item">
+                        <button 
+                            className="menu-bar-link logout-button" 
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </button>
                     </li>
                 )}
             </ul>
