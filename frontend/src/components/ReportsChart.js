@@ -1,6 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import api from '../services/api';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const ReportsChart = () => {
     const [chartData, setChartData] = useState(null);
@@ -18,16 +30,21 @@ const ReportsChart = () => {
         };
 
         fetchChartData();
+
+        return () => {
+            ChartJS.unregister(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+        };
     }, []);
 
     return (
-        <div>
-            <h2>Reports Chart</h2>
+        <div className="chart-container">
+            <h2 className="page-header">Reports Chart</h2>
             {chartData ? (
                 <Line
                     data={chartData}
                     options={{
                         responsive: true,
+                        maintainAspectRatio: false,
                         plugins: {
                             legend: { display: true },
                             tooltip: { enabled: true },
@@ -35,9 +52,9 @@ const ReportsChart = () => {
                     }}
                 />
             ) : (
-                <p>Loading chart data...</p>
+                <p className="loading-message">Loading chart data...</p>
             )}
-            <p>{description || "This chart showcases participation levels in workshops, events, and surveys at UNC Charlotte."}</p>
+            <p className="chart-description">{description || "This chart showcases participation levels in events and surveys at UNC Charlotte."}</p>
         </div>
     );
 };

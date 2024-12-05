@@ -144,14 +144,15 @@ a:hover {
 
 /* Chart Container */
 .chart-container {
-  max-width: 800px;
   width: 100%;
+  max-width: 800px;
+  height: 400px; /* Consistent height for all charts */
   margin: 2rem auto;
   padding: 1rem;
   background-color: white;
   border: 1px solid var(--secondary-color);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 

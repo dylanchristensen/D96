@@ -13,9 +13,11 @@ const MenuBar = () => {
 
     return (
         <nav className="menu-bar" aria-label="Main Navigation">
-            <img src="/path-to-favicon.png" alt="Logo" className="menu-bar-logo" />
-            <ul className="menu-bar-list" role="menu">
-                <li className="menu-bar-item" role="menuitem">
+            <div className="menu-bar-logo">
+                <img src="/favicon.ico" alt="App Logo" className="favicon" />
+            </div>
+            <ul className="menu-bar-list">
+                <li className="menu-bar-item">
                     <NavLink 
                         to="/dashboard" 
                         className={({ isActive }) => isActive ? 'menu-bar-link active' : 'menu-bar-link'}

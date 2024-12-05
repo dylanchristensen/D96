@@ -1,57 +1,78 @@
 /* MenuBar */
 .menu-bar {
-    background-color: var(--menu-bg-color);
-    padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .menu-bar-list {
-    list-style: none;
-    display: flex;
-    gap: 1rem;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .menu-bar-item {
-    display: inline;
-  }
-  
-  .menu-bar-link {
-    text-decoration: none;
-    color: var(--menu-text-color);
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .menu-bar-link:hover {
-    background-color: var(--menu-hover-color);
-    color: var(--menu-text-hover-color);
-  }
-  
-  .menu-bar-link.active {
-    background-color: var(--menu-active-color);
-    color: var(--menu-text-hover-color);
-  }
-  
-  .logout-button {
-    border: none;
-    background: none;
-    font-size: 1rem;
-    color: var(--menu-text-color);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .logout-button:hover {
-    background-color: var(--menu-hover-color);
-    color: var(--menu-text-hover-color);
-  }
-  
+  background-color: var(--menu-bg-color);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Favicon  */
+.menu-bar-logo {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.favicon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Centered Menu Items */
+.menu-bar-list {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0 auto;
+  padding: 0;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+/* Individual Menu Items */
+.menu-bar-item {
+  display: inline;
+}
+
+/* Menu Links */
+.menu-bar-link {
+  text-decoration: none;
+  color: var(--menu-text-color);
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-bar-link:hover {
+  background-color: var(--menu-hover-color);
+  color: var(--menu-text-hover-color);
+}
+
+.menu-bar-link.active {
+  background-color: var(--menu-active-color);
+  color: var(--menu-text-hover-color);
+}
+
+/* Logout Button Positioned Right */
+.logout-button {
+  border: none;
+  background: none;
+  font-size: 1rem;
+  color: var(--menu-text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-left: auto; /* Align logout to the far right */
+}
+
+.logout-button:hover {
+  background-color: var(--menu-hover-color);
+  color: var(--menu-text-hover-color);
+}

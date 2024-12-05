@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import api from '../services/api';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const SummaryChart = () => {
     const [chartData, setChartData] = useState(null);
@@ -18,16 +29,21 @@ const SummaryChart = () => {
         };
 
         fetchChartData();
+
+        return () => {
+            ChartJS.unregister(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+        };
     }, []);
 
     return (
-        <div>
-            <h2>Summary Chart</h2>
+        <div className="chart-container">
+            <h2 className="page-header">Summary Chart</h2>
             {chartData ? (
                 <Bar
                     data={chartData}
                     options={{
                         responsive: true,
+                        maintainAspectRatio: false,
                         plugins: {
                             legend: { display: true },
                             tooltip: { enabled: true },
@@ -35,9 +51,9 @@ const SummaryChart = () => {
                     }}
                 />
             ) : (
-                <p>Loading chart data...</p>
+                <p className="loading-message">Loading chart data...</p>
             )}
-            <p>{description || "This chart represents the percentage breakdown of UNC Charlotte's recent waste management improvements."}</p>
+            <p className="chart-description">{description || "This chart represents UNC Charlotte's recent waste management improvements."}</p>
         </div>
     );
 };
