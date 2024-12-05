@@ -1,50 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"; 
 import { fetchDashboard } from "../services/api";
-import "../index.css"; // Import global styles
+import { Navigate } from "react-router-dom"; // Added for redirection
+import { isAuthenticated } from "../services/auth"; 
 
 const Dashboard = () => {
-  const [content, setContent] = useState({}); // State to hold dashboard content
-  const [error, setError] = useState(null); // State to capture errors
+  if (!isAuthenticated()) return <Navigate to="/login" />; // Redirect if not logged in
+
+  const [content, setContent] = useState({});
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchDashboard();
+        const response = await fetchDashboard(); 
         setContent(response.data);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to load dashboard content");
       }
     };
-
     fetchData();
   }, []);
 
   if (error) {
-    return (
-      <div className="error-message">
-        <p>Error: {error}</p>
-      </div>
-    );
+    return <p className="error-message">{error}</p>;
   }
 
   return (
-    <div className="dashboard-container">
-      <h2 className="dashboard-header">Dashboard</h2>
+    <div className="page-container">
+      <h2 className="page-header">Dashboard</h2>
       {content.summary ? (
-        <div className="dashboard-content">
-          <p className="dashboard-summary">{content.summary}</p>
-          {content.referenceUrl && (
-            <a
-              className="dashboard-link"
-              href={content.referenceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Source
-            </a>
-          )}
+        <>
+          <p>{content.summary}</p>
+          <a href={content.referenceUrl} target="_blank" rel="noopener noreferrer" className="dashboard-link">
+            Source
+          </a>
           <p className="dashboard-tech-stack">{content.techStack}</p>
-        </div>
+        </>
       ) : (
         <p className="loading-message">Loading...</p>
       )}

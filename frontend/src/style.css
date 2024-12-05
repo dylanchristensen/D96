@@ -35,65 +35,26 @@ code {
   padding: 1.5rem;
 }
 
-/* MenuBar */
-.menu-bar {
-  background-color: var(--menu-bg-color);
-  padding: 0.5rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Page Container */
+.page-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.menu-bar-list {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
+/* Page Header */
+.page-header {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-.menu-bar-item {
-  display: inline;
-}
-
-.menu-bar-link {
-  text-decoration: none;
-  color: var(--menu-text-color);
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.menu-bar-link:hover {
-  background-color: var(--menu-hover-color);
-  color: var(--menu-text-hover-color);
-}
-
-.menu-bar-link.active {
-  background-color: var(--menu-active-color);
-  color: var(--menu-text-hover-color);
-}
-
-.logout-button {
-  border: none;
-  background: none;
-  font-size: 1rem;
-  color: var(--menu-text-color);
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  margin-left: auto;
-}
-
-.logout-button:hover {
-  background-color: var(--menu-hover-color);
-  color: var(--menu-text-hover-color);
-}
-
-/* Page Content */
+/* Typography */
 h1, h2, h3 {
   color: var(--primary-color);
 }
@@ -112,26 +73,8 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Reusable Containers */
-.page-container {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: var(--background-color);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.page-header {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--primary-color);
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-/* Forms */
-.login-container, .form-container {
+/* Login Page Styles */
+.login-container {
   max-width: 400px;
   margin: 5rem auto;
   padding: 2rem;
@@ -140,10 +83,24 @@ a:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.login-form, .form-group {
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.login-header {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .form-label {
@@ -179,7 +136,13 @@ a:hover {
   background-color: var(--link-hover);
 }
 
-/* Charts */
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Chart Container */
 .chart-container {
   margin: 2rem 0;
   padding: 1rem;
@@ -192,14 +155,6 @@ a:hover {
 .chart-description {
   font-size: 1rem;
   color: var(--secondary-color);
-  text-align: center;
-  margin-top: 1rem;
-}
-
-/* Messages */
-.error-message {
-  color: red;
-  font-size: 1rem;
   text-align: center;
   margin-top: 1rem;
 }

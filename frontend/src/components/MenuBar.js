@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { isAuthenticated } from '../services/auth';
+import './MenuBar.css';
 
 const MenuBar = () => {
     const navigate = useNavigate();
