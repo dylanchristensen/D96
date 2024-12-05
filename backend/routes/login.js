@@ -1,5 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+
 const { SECRET_KEY } = require('../config'); // Import the secret key
 
 const router = express.Router();

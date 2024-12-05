@@ -1,4 +1,5 @@
 const router = require('express').Router();
+
 const authenticate = require('../middleware/authMiddleware');
 
 // Protected dashboard route
