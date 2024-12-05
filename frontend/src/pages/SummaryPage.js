@@ -1,11 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { fetchChartSummary } from "../services/api";
 import { Line } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
+import { Navigate } from "react-router-dom";
+import { isAuthenticated } from "../auth";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const Summary = () => {
+  if (!isAuthenticated()) return <Navigate to="/login" />;
+
   const [chartData, setChartData] = useState(null);
   const [description, setDescription] = useState("");
 
