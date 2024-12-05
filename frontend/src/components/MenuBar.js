@@ -13,6 +13,7 @@ const MenuBar = () => {
 
     return (
         <nav className="menu-bar" aria-label="Main Navigation">
+            <img src="/path-to-favicon.png" alt="Logo" className="menu-bar-logo" />
             <ul className="menu-bar-list" role="menu">
                 <li className="menu-bar-item" role="menuitem">
                     <NavLink 
@@ -38,18 +39,16 @@ const MenuBar = () => {
                         Reports
                     </NavLink>
                 </li>
-                {isAuthenticated() && (
-                    <li className="menu-bar-item" role="menuitem">
-                        <button 
-                            className="menu-bar-link logout-button" 
-                            onClick={handleLogout}
-                            aria-label="Logout"
-                        >
-                            Logout
-                        </button>
-                    </li>
-                )}
             </ul>
+            {isAuthenticated() && (
+                <button 
+                    className="logout-button" 
+                    onClick={handleLogout}
+                    aria-label="Logout"
+                >
+                    Logout
+                </button>
+            )}
         </nav>
     );
 };
