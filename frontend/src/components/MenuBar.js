@@ -12,8 +12,8 @@ const MenuBar = () => {
 
     return (
         <nav className="menu-bar" aria-label="Main Navigation">
-            <ul className="menu-bar-list">
-                <li className="menu-bar-item">
+            <ul className="menu-bar-list" role="menu">
+                <li className="menu-bar-item" role="menuitem">
                     <NavLink 
                         to="/dashboard" 
                         className={({ isActive }) => isActive ? 'menu-bar-link active' : 'menu-bar-link'}
@@ -21,7 +21,7 @@ const MenuBar = () => {
                         Dashboard
                     </NavLink>
                 </li>
-                <li className="menu-bar-item">
+                <li className="menu-bar-item" role="menuitem">
                     <NavLink 
                         to="/summary" 
                         className={({ isActive }) => isActive ? 'menu-bar-link active' : 'menu-bar-link'}
@@ -29,7 +29,7 @@ const MenuBar = () => {
                         Summary
                     </NavLink>
                 </li>
-                <li className="menu-bar-item">
+                <li className="menu-bar-item" role="menuitem">
                     <NavLink 
                         to="/reports" 
                         className={({ isActive }) => isActive ? 'menu-bar-link active' : 'menu-bar-link'}
@@ -38,7 +38,7 @@ const MenuBar = () => {
                     </NavLink>
                 </li>
                 {isAuthenticated() && (
-                    <li className="menu-bar-item">
+                    <li className="menu-bar-item" role="menuitem">
                         <button 
                             className="menu-bar-link logout-button" 
                             onClick={handleLogout}

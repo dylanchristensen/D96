@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { login } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import "../index.css"; // Import global styles
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState("");
@@ -23,37 +24,41 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} aria-label="Login Form">
-      <h2>Login</h2>
-      {error && <p className="error-message">{error}</p>} {/* Display error messages */}
-      <div>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          name="username"
-          type="text"
-          placeholder="Enter your username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          autoComplete="username" // Helps browser handle autofill
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password" // Helps browser handle autofill
-          required
-        />
-      </div>
-      <button type="submit">Login</button>
-    </form>
+    <div className="login-container">
+      <form onSubmit={handleSubmit} aria-label="Login Form" className="login-form">
+        <h2 className="login-header">Login</h2>
+        {error && <p className="error-message">{error}</p>} {/* Display error messages */}
+        <div className="form-group">
+          <label htmlFor="username" className="form-label">Username</label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            placeholder="Enter your username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            autoComplete="username" // Helps browser handle autofill
+            required
+            className="form-input"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password" className="form-label">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password" // Helps browser handle autofill
+            required
+            className="form-input"
+          />
+        </div>
+        <button type="submit" className="form-button">Login</button>
+      </form>
+    </div>
   );
 };
 

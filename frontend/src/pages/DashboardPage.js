@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchDashboard } from "../services/api";
-import { isAuthenticated } from "../services/auth"; // Import auth function
-
+import "../index.css"; // Import global styles
 
 const Dashboard = () => {
   const [content, setContent] = useState({}); // State to hold dashboard content
@@ -10,32 +9,44 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchDashboard(); 
+        const response = await fetchDashboard();
         setContent(response.data);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to load dashboard content");
       }
     };
-  
+
     fetchData();
   }, []);
-  
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <div className="error-message">
+        <p>Error: {error}</p>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h2>Dashboard</h2>
+    <div className="dashboard-container">
+      <h2 className="dashboard-header">Dashboard</h2>
       {content.summary ? (
-        <>
-          <p>{content.summary}</p>
-          <a href={content.referenceUrl} target="_blank" rel="noopener noreferrer">Source</a>
-          <p>{content.techStack}</p>
-        </>
+        <div className="dashboard-content">
+          <p className="dashboard-summary">{content.summary}</p>
+          {content.referenceUrl && (
+            <a
+              className="dashboard-link"
+              href={content.referenceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Source
+            </a>
+          )}
+          <p className="dashboard-tech-stack">{content.techStack}</p>
+        </div>
       ) : (
-        <p>Loading...</p>
+        <p className="loading-message">Loading...</p>
       )}
     </div>
   );
