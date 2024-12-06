@@ -6,6 +6,11 @@
   --background-color: #f5f5f5; /* Light gray */
   --text-color: #2c3e50; /* Dark text */
   --link-hover: #1abc9c; /* Subtle green */
+  --menu-bg-color: #1a1a2e; /* Darker background for menu */
+  --menu-hover-color: #2a2a40; /* Hover color for menu items */
+  --menu-active-color: #4CAF50; /* Active menu item highlight */
+  --menu-text-color: #ffffff; /* Menu item text color */
+  --menu-text-hover-color: #e0e0e0; /* Menu item hover text color */
   --font-family: 'Georgia', 'Cambria', 'Times New Roman', Times, serif;
 }
 
@@ -23,6 +28,88 @@ body {
   max-width: 960px;
   margin: 0 auto;
   padding: 2rem;
+}
+
+/* Menu Bar */
+.menu-bar {
+  background-color: var(--menu-bg-color);
+  padding: 1rem 2rem; /* Increased padding for more space around items */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Favicon */
+.menu-bar-logo {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  min-width: 32px; 
+  min-height: 32px;
+}
+
+.favicon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Centered Menu Items */
+.menu-bar-list {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+/* Individual Menu Items */
+.menu-bar-item {
+  display: inline;
+}
+
+/* Menu Links */
+.menu-bar-link {
+  text-decoration: none;
+  color: var(--menu-text-color);
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-bar-link:hover {
+  background-color: var(--menu-hover-color);
+  color: var(--menu-text-hover-color);
+}
+
+.menu-bar-link.active {
+  background-color: var(--menu-active-color);
+  color: var(--menu-text-hover-color);
+}
+
+/* Logout Button Positioned Right */
+.logout-button {
+  border: none;
+  background: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--menu-text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-left: auto;
+}
+
+.logout-button:hover {
+  background-color: var(--menu-hover-color);
+  color: var(--menu-text-hover-color);
 }
 
 /* Page Container */
@@ -190,5 +277,16 @@ a:hover {
 
   .chart-container canvas {
     width: 100%; /* Allow canvas to take full width on smaller screens */
+  }
+
+  .menu-bar-list {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .logout-button {
+    margin-left: 0; 
+    margin-top: 1rem; 
   }
 }

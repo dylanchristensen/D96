@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useAuth } from "../context/AuthContext";
-import './MenuBar.css';
+import '../style.css';
 
 const MenuBar = ({ handleLogout }) => {
     const { isAuthenticated } = useAuth(); // Use context for authentication state
