@@ -19,19 +19,8 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-const authRoutes = require('./routes/auth');
-const chartDataRoutes = require('./routes/chartData');
-const dashboardRoutes = require('./routes/dashboard');
-
-app.use('/auth', authRoutes);
-app.use('/chartData', chartDataRoutes);
-app.use('/dashboard', dashboardRoutes);
-
-// Catch-all for undefined routes
-app.use((req, res) => {
-    console.warn(`404 - Route not found: ${req.originalUrl}`);
-    res.status(404).json({ message: 'Route not found' });
-});
+const routes = require('./routes/routes');
+app.use('/', routes);
 
 // MongoDB connection
 mongoose
