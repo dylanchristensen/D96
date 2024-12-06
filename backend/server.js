@@ -2,9 +2,7 @@ require('dotenv').config(); // Load .env variables
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const authRoutes = require('./routes/auth');
-const chartDataRoutes = require('./routes/chartData');
-const dashboardRoutes = require('./routes/dashboard');
+const routes = require('./routes'); // New consolidated routes
 
 // Environment variables
 const PORT = process.env.PORT || 3000;
@@ -16,15 +14,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Default route
-app.get('/', (req, res) => {
-    res.status(200).json({ message: 'API is running. Use /auth, /chartData, or /dashboard' });
-});
-
 // Routes
-app.use('/auth', authRoutes);
-app.use('/chartData', chartDataRoutes);
-app.use('/dashboard', dashboardRoutes);
+app.use('/', routes); // Consolidated routes
 
 // Catch-all for undefined routes
 app.use((req, res) => {
