@@ -42,7 +42,7 @@ const Dashboard = () => {
                     >
                         Source
                     </a>
-                    <h3 className="tech-header">Technical Overview</h3> {/* Added header for tech summary */}
+                    <h3 className="page-header">Technical Overview</h3> {/* Added header for tech summary */}
                     <p className="dashboard-tech-stack">{content.techStack}</p>
                 </>
             ) : (
