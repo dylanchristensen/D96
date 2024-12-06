@@ -123,18 +123,10 @@ router.get('/dashboard', authenticate, (req, res) => {
         `,
         referenceUrl: "https://inside.charlotte.edu/2024/10/07/sga-leads-student-sustainability-on-campus",
         techStack: `
-        **Technical Overview:**
-        - **Backend:** Built using Node.js and Express.js to create RESTful APIs that serve data to the frontend. 
-        - **Frontend:** Developed with React.js for building an interactive and responsive user interface.
-        - **Database:** MongoDB is used as the primary data storage solution for dynamic and structured data.
-        - **Authentication:** Implemented using JWT (JSON Web Tokens) to secure endpoints and provide session-based access control.
-        - **Deployment:** 
-            - The application is hosted on a DigitalOcean droplet. 
-            - NGINX is configured to serve the React frontend and proxy requests to the Node.js backend.
-            - PM2 is utilized for process management and to ensure high availability of backend services.
-        - **Additional Tools:**
-            - PostCSS is integrated for processing CSS files with autoprefixer.
-            - Chart.js is used in the frontend for data visualization in reports and summaries.
+        The backend is built with Node.js and Express.js to create RESTful APIs. The frontend uses React.js to provide a responsive and dynamic user interface. MongoDB serves as the database 
+        for structured data storage, while JWT (JSON Web Tokens) is used to manage secure authentication. The application is hosted on a DigitalOcean droplet, with NGINX handling requests by 
+        serving the React frontend and proxying to the backend. PM2 is used for process management to ensure reliable backend service. PostCSS is integrated for CSS processing, and Chart.js 
+        is utilized for visualizing data in reports and summaries.
         `,
         techStackSummary: "Backend: Node.js, Frontend: React, Database: MongoDB, Deployment: DigitalOcean with NGINX and PM2"
     });
