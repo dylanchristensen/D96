@@ -6,12 +6,6 @@
   --background-color: #f5f5f5; /* Light gray */
   --text-color: #2c3e50; /* Dark text */
   --link-hover: #1abc9c; /* Subtle green */
-
-  --menu-bg-color: #1a1a2e; /* Darker background for menu */
-  --menu-hover-color: #2a2a40;
-  --menu-active-color: #4CAF50; /* Highlight green */
-  --menu-text-color: #ffffff;
-  --menu-text-hover-color: #e0e0e0;
   --font-family: 'Georgia', 'Cambria', 'Times New Roman', Times, serif;
 }
 
@@ -137,25 +131,28 @@ a:hover {
 .chart-container {
   margin: 2.5rem auto;
   padding: 2rem;
-  max-width: 900px;
-  width: 100%; 
+  max-width: 100%;
+  width: calc(100% - 40px); /* Add padding on both sides for breathing room */
   background: #ffffff;
   border: 1px solid var(--secondary-color);
   border-radius: 10px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
-  text-align: center; 
+  text-align: center;
+  overflow: hidden; /* Ensure content stays within the container */
 }
 
+/* Chart Canvas */
 .chart-container canvas {
-  max-width: 100%; 
-  height: auto; 
+  max-width: 100%;
+  width: 90%; /* Keep some spacing on the sides */
+  height: auto;
+  margin: 0 auto; /* Center align the canvas */
 }
 
-
+/* Line and Pie Chart Specific Styling */
 .line-chart {
   height: 400px;
 }
-
 
 .pie-chart {
   height: 500px; 
@@ -178,8 +175,7 @@ a:hover {
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .chart-container {
-    width: 90%;
-    min-width: unset;
+    width: 95%;
     padding: 1rem; 
   }
 
@@ -192,14 +188,7 @@ a:hover {
     padding: 1.5rem;
   }
 
-  .menu-bar-list {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-  }
-
-  .logout-button {
-    margin-left: 0; 
-    margin-top: 1rem; 
+  .chart-container canvas {
+    width: 100%; /* Allow canvas to take full width on smaller screens */
   }
 }
