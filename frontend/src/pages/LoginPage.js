@@ -26,7 +26,7 @@ const Login = ({ onLogin }) => {
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} aria-label="Login Form" className="login-form">
-        <h2 className="login-header">Login</h2>
+        <h2 className="page-header">Login</h2>
         {error && <p className="error-message">{error}</p>} {/* Display error messages */}
         <div className="form-group">
           <label htmlFor="username" className="form-label">Username</label>
