@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import jwt_decode from "jwt-decode"; // Correct import
 
 const AuthContext = createContext();
 
@@ -10,26 +9,8 @@ AuthProvider.propTypes = {
 
 // Define the checkAuth function to determine the initial authentication status
 const checkAuth = () => {
-  // Retrieve the token from localStorage
-  const token = localStorage.getItem("token");
-
-  // Check if the token exists and whether it can be decoded
-  if (token) {
-    try {
-      const { exp } = jwt_decode(token); // Correct usage of jwt_decode
-      // Ensure token hasn't expired
-      if (Date.now() >= exp * 1000) {
-        localStorage.removeItem("token"); // Remove expired token
-        return false;
-      }
-      return true;
-    } catch (err) {
-      console.error("Error decoding token:", err.message);
-      return false;
-    }
-  }
-
-  return false; // No valid token found
+  // Check if the token exists in localStorage
+  return !!localStorage.getItem("token");
 };
 
 export const AuthProvider = ({ children }) => {

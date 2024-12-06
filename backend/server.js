@@ -2,23 +2,6 @@ require('dotenv').config(); // Load .env variables
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const winston = require('winston'); // Logging library
-
-// Set up Winston logger
-const logger = winston.createLogger({
-    level: 'info',
-    format: winston.format.combine(
-        winston.format.timestamp(),
-        winston.format.printf(({ timestamp, level, message }) => {
-            return `${timestamp} [${level.toUpperCase()}]: ${message}`;
-        })
-    ),
-    transports: [
-        new winston.transports.Console({ format: winston.format.colorize() }), // Console transport
-        new winston.transports.File({ filename: 'logs/app.log', level: 'info' }), // File transport for info logs
-        new winston.transports.File({ filename: 'logs/error.log', level: 'error' }) // File transport for errors
-    ]
-});
 
 // Environment variables
 const PORT = process.env.PORT || 3000;
@@ -46,22 +29,22 @@ app.use('/dashboard', dashboardRoutes);
 
 // Catch-all for undefined routes
 app.use((req, res) => {
-    logger.warn(`404 - Route not found: ${req.originalUrl}`);
+    console.warn(`404 - Route not found: ${req.originalUrl}`);
     res.status(404).json({ message: 'Route not found' });
 });
 
 // MongoDB connection
 mongoose
     .connect(MONGO_URI)
-    .then(() => logger.info('MongoDB connected'))
+    .then(() => console.log('MongoDB connected'))
     .catch((err) => {
-        logger.error(`MongoDB connection error: ${err.message}`);
+        console.error(`MongoDB connection error: ${err.message}`);
         throw new Error("Server encountered a critical error and will shut down.");
     });
 
 // Global error handler
 app.use((err, req, res, next) => {
-    logger.error(`Global Error: ${err.message}`);
+    console.error(`Global Error: ${err.message}`);
     if (!res.headersSent) {
         res.status(500).json({ message: 'Internal Server Error' });
     }
@@ -70,5 +53,5 @@ app.use((err, req, res, next) => {
 
 // Start the server
 app.listen(PORT, () => {
-    logger.info(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on http://localhost:${PORT}`);
 });
