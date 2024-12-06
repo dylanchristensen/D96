@@ -33,7 +33,7 @@ const Dashboard = () => {
             <h2 className="page-header">Dashboard</h2>
             {content.summary ? (
                 <>
-                    <p>{content.summary}</p>
+                    <p className="summary-section">{content.summary}</p>
                     <a
                         href={content.referenceUrl}
                         target="_blank"
@@ -42,6 +42,7 @@ const Dashboard = () => {
                     >
                         Source
                     </a>
+                    <h3 className="tech-header">Technical Overview</h3> {/* Added header for tech summary */}
                     <p className="dashboard-tech-stack">{content.techStack}</p>
                 </>
             ) : (

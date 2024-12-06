@@ -258,6 +258,17 @@ a:hover {
   text-align: center;
   margin-top: 1.5rem;
 }
+/* Technical Summary Header */
+.tech-header {
+  font-size: 1.6rem;
+  color: var(--primary-color);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  text-align: left;
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 0.5rem;
+}
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
