@@ -46,7 +46,7 @@ const SummaryPage = () => {
     return (
         <div className="page-container">
             <h2 className="page-header">Summary</h2>
-            <div className="chart-container">
+            <div className="chart-container line-chart">
                 <Line
                     data={{
                         labels: chartData.labels,

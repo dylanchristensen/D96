@@ -43,7 +43,7 @@ const ReportsPage = () => {
     return (
         <div className="page-container">
             <h2 className="page-header">Reports</h2>
-            <div className="chart-container">
+            <div className="chart-container pie-chart">
                 <Pie
                     data={{
                         labels: chartData.labels,
@@ -58,6 +58,7 @@ const ReportsPage = () => {
                     }}
                 />
             </div>
+
             <p className="chart-description">{description}</p>
         </div>
     );
