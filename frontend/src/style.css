@@ -1,189 +1,81 @@
-/* Root Variables */
-:root {
-  --primary-color: #2c3e50; /* Rich navy */
-  --secondary-color: #34495e; /* Deep gray */
-  --accent-color: #3498db; /* Calm blue */
-  --background-color: #f5f5f5; /* Light gray */
-  --text-color: #2c3e50; /* Dark text */
-  --link-hover: #1abc9c; /* Subtle green */
-
-  --menu-bg-color: #1a1a2e; /* Darker background for menu */
-  --menu-hover-color: #2a2a40;
-  --menu-active-color: #4CAF50; /* Highlight green */
-  --menu-text-color: #ffffff;
-  --menu-text-hover-color: #e0e0e0;
-  --font-family: 'Georgia', 'Cambria', 'Times New Roman', Times, serif;
+/* MenuBar */
+.menu-bar {
+  background-color: var(--menu-bg-color);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Reset */
-body {
+/* Favicon */
+.menu-bar-logo {
+  display: inline-block;
+  width: 48px; /* Set a fixed size */
+  height: 48px; /* Set a fixed size */
+  border-radius: 50%;
+  margin-right: 1rem;
+  min-width: 32px; /* Prevent shrinking below this size */
+  min-height: 32px; /* Prevent shrinking below this size */
+}
+
+.favicon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Centered Menu Items */
+.menu-bar-list {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
   margin: 0;
-  font-family: var(--font-family);
-  background-color: var(--background-color);
-  color: var(--text-color);
-  line-height: 1.8; /* Slightly increased for readability */
+  padding: 0;
+  flex-grow: 1;
+  justify-content: center;
 }
 
-/* General Layout */
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Individual Menu Items */
+.menu-bar-item {
+  display: inline;
 }
 
-/* Page Container */
-.page-container {
-  max-width: 900px;
-  margin: 2.5rem auto;
-  padding: 2rem;
-  background-color: var(--background-color);
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-}
-
-/* Typography */
-h1, h2, h3 {
-  color: var(--primary-color);
-  font-weight: 600; /* Slightly bold */
-}
-
-p {
-  margin-bottom: 1.8rem;
-}
-
-a {
-  color: var(--accent-color);
+/* Menu Links */
+.menu-bar-link {
   text-decoration: none;
-  font-weight: 500; /* Subtle bold for emphasis */
-}
-
-a:hover {
-  color: var(--link-hover);
-  text-decoration: underline;
-}
-
-/* Login Page */
-.login-container {
-  max-width: 400px;
-  margin: 5rem auto;
-  padding: 3rem;
-  background-color: var(--background-color);
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Slightly larger shadow for elegance */
-}
-
-.login-header {
-  font-size: 2.2rem;
-  font-weight: bold;
-  color: var(--primary-color);
-  text-align: center;
-  margin-bottom: 2rem;
-  font-family: var(--font-family); /* Apply premium font */
-}
-
-.form-group {
-  margin-bottom: 1.8rem;
-}
-
-.form-label {
+  color: var(--menu-text-color);
   font-size: 1rem;
-  color: var(--secondary-color);
-  margin-bottom: 0.5rem;
-  display: block; /* Ensure alignment */
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.form-input {
-  font-size: 1rem;
-  padding: 0.9rem;
-  border: 1px solid var(--secondary-color);
-  border-radius: 8px;
-  outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  width: 100%; /* Ensure proper alignment and fill */
+.menu-bar-link:hover {
+  background-color: var(--menu-hover-color);
+  color: var(--menu-text-hover-color);
 }
 
-.form-input:focus {
-  border-color: var(--accent-color);
-  box-shadow: 0 0 10px rgba(52, 152, 219, 0.5); /* Softer shadow effect */
+.menu-bar-link.active {
+  background-color: var(--menu-active-color);
+  color: var(--menu-text-hover-color);
 }
 
-.form-button {
-  padding: 0.9rem 1.2rem;
-  font-size: 1.2rem;
-  background-color: var(--accent-color);
-  color: white;
+/* Logout Button Positioned Right */
+.logout-button {
   border: none;
-  border-radius: 8px;
+  background: none;
+  font-size: 1rem; /* Match font size to other menu items */
+  font-weight: 500; /* Match font weight to other links */
+  color: var(--menu-text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  width: 100%; /* Button spans full width */
-  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-left: auto; /* Align logout to the far right */
 }
 
-.form-button:hover {
-  background-color: var(--link-hover);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Refined shadow on hover */
-}
-
-.error-message {
-  color: #e74c3c; /* Use a refined red for error messages */
-  font-size: 1rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-weight: bold;
-}
-
-/* Chart Container */
-.chart-container {
-  margin: 2.5rem auto;
-  padding: 2rem;
-  min-width: 500px; /* Prevent charts from becoming too small */
-  max-width: 900px; /* Ensure consistency */
-  background: #ffffff;
-  border: 1px solid var(--secondary-color);
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Increased shadow */
-}
-
-.chart-header {
-  font-size: 1.8rem;
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.chart-description {
-  font-size: 1.1rem;
-  color: var(--secondary-color);
-  text-align: center;
-  margin-top: 1.5rem;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .chart-container {
-    width: 90%;
-    min-width: unset;
-    padding: 1rem; 
-  }
-
-  .login-container {
-    max-width: 90%;
-    padding: 2rem;
-  }
-
-  .page-container {
-    padding: 1.5rem;
-  }
-
-  .menu-bar-list {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-  }
-
-  .logout-button {
-    margin-left: 0; 
-    margin-top: 1rem; 
-  }
+.logout-button:hover {
+  background-color: var(--menu-hover-color);
+  color: var(--menu-text-hover-color);
 }
