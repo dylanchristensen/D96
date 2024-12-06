@@ -18,12 +18,13 @@ const App = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsAuthenticated(false);
-    window.location.href = "/login";
   };
 
   return (
     <Router>
-      {isAuthenticated && <MenuBar handleLogout={handleLogout} />}
+      {(isAuthenticated && window.location.pathname !== "/login") && (
+        <MenuBar handleLogout={handleLogout} />
+      )}
       <Routes>
         <Route path="/" element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
