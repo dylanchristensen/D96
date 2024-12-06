@@ -162,8 +162,9 @@ a:hover {
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .chart-container {
-    min-width: unset; /* Allow smaller charts on small devices */
-    padding: 1rem; /* Reduce padding */
+    width: 90%;
+    min-width: unset;
+    padding: 1rem; 
   }
 
   .login-container {

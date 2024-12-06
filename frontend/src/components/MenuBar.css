@@ -1,13 +1,11 @@
 /* MenuBar */
 .menu-bar {
   background-color: var(--menu-bg-color);
-  padding: 0.5rem 1rem;
+  padding: 1rem 2rem; /* Increased padding for more space around items */
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 /* Favicon */
@@ -16,7 +14,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  margin-right: 1rem;
+  margin-right: 1.5rem;
 }
 
 .favicon {
@@ -34,7 +32,6 @@
   padding: 0;
   flex-grow: 1;
   justify-content: center;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 /* Individual Menu Items */
@@ -72,29 +69,9 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
-  margin-left: 2rem; /* Increased to ensure proper spacing on large screens */
-  order: 2; /* Make sure logout button stays on the far right */
 }
 
 .logout-button:hover {
   background-color: var(--menu-hover-color);
   color: var(--menu-text-hover-color);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .menu-bar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .menu-bar-list {
-    justify-content: flex-start;
-    gap: 1rem;
-  }
-
-  .logout-button {
-    margin-left: 0; /* Remove margin-left to align buttons */
-    margin-top: 1rem; /* Add top margin to visually separate */
-  }
 }
