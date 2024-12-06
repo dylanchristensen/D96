@@ -4,7 +4,7 @@
   "description": "Backend for the D96 app",
   "main": "server.js",
   "scripts": {
-    "start": "node backend/server.js",
+    "start": "node server.js",
     "dev": "nodemon server.js",
     "lint": "eslint ."
   },
@@ -19,12 +19,8 @@
     "eslint": "^9.15.0",
     "nodemon": "^3.1.7"
   },
-  "keywords": [
-    "backend",
-    "nodejs",
-    "express",
-    "api"
-  ],
+  "keywords": ["backend", "nodejs", "express", "api"],
   "author": "Your Name",
   "license": "ISC"
 }
+

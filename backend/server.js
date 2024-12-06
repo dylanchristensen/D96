@@ -2,6 +2,9 @@ require('dotenv').config(); // Load .env variables
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const authRoutes = require('./routes/auth');
+const chartDataRoutes = require('./routes/chartData');
+const dashboardRoutes = require('./routes/dashboard');
 
 // Environment variables
 const PORT = process.env.PORT || 3000;
@@ -19,25 +22,31 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-const routes = require('./routes/routes');
-app.use('/', routes);
+app.use('/auth', authRoutes);
+app.use('/chartData', chartDataRoutes);
+app.use('/dashboard', dashboardRoutes);
+
+// Catch-all for undefined routes
+app.use((req, res) => {
+    res.status(404).json({ message: 'Route not found' });
+});
 
 // MongoDB connection
 mongoose
     .connect(MONGO_URI)
     .then(() => console.log('MongoDB connected'))
-    .catch((err) => {
-        console.error(`MongoDB connection error: ${err.message}`);
-        throw new Error("Server encountered a critical error and will shut down.");
+    .catch(err => {
+        console.error('MongoDB connection error:', err);
+        process.exit(1); // Exit if unable to connect
     });
 
 // Global error handler
 app.use((err, req, res, next) => {
-    console.error(`Global Error: ${err.message}`);
+    console.error('Global Error:', err.message);
     if (!res.headersSent) {
         res.status(500).json({ message: 'Internal Server Error' });
     }
-    next(); // Pass error to the default Express handler
+    next(err); // Pass error to the default Express handler
 });
 
 // Start the server
