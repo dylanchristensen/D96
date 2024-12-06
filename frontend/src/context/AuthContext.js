@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import jwtDecode from "jwt-decode"; // Import jwt-decode to decode tokens
+import { decode as jwtDecode } from "jwt-decode"; // Corrected import statement
 
 const AuthContext = createContext();
 
