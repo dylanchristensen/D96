@@ -48,6 +48,8 @@ The project is built using a modern full-stack architecture with **React.js** on
 
 ## How to Access the Project
 To access the project, simply navigate to http://64.225.11.18 in your web browser. The backend and frontend are hosted on the same server, and the application is accessible at all times.
+
+
 edit: the semester is over (I got an A) so I no longer need to keep this live. As such, the application is no longer available at the listed IP any longer. 
 
 ## How to Run the Project Locally
